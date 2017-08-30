@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 实体类映射文件配置的就是表和类之间的关系 -->
+  <class name="cn.bean.AuctionUser" table="auctionuser" catalog="auctiondb">
+     <!-- hibernate要求表一定要有主键 -->
+     <!-- 主键列的配置 -->
+     <id name="userId" type="integer">
+       <column name="userId" not-null="true"></column>
+       <!-- mysql和sql server自增长方式设置为identity -->
+       <generator class="identity"></generator>
+     </id>
+     <!-- 配置常规属性和列 -->
+     <property name="userName" type="string">
+       <column name="userName" not-null="true"></column>
+     </property>
+     <property name="userPassword" type="string">
+       <column name="userPassword" not-null="true"></column>
+     </property>
+     <property name="userCardNo" type="string">
+       <column name="userCardNo" ></column>
+     </property>
+     <property name="userTel" type="string">
+       <column name="userTel" ></column>
+     </property>
+     <property name="userAddress" type="string">
+       <column name="userAddress" ></column>
+     </property>
+     <property name="userPostNumber" type="string">
+       <column name="userPostNumber" ></column>
+     </property>
+     <property name="userIsadmin" type="integer">
+       <column name="userIsadmin" ></column>
+     </property>
+     <property name="userQuestion" type="string">
+       <column name="userQuestion" ></column>
+     </property>
+     <property name="userAnswer" type="string">
+       <column name="userAnswer" ></column>
+     </property>
+    <set name="record2" cascade="all" lazy="false">
+      <key>
+        <column name="userId"></column>
+      </key>
+      <one-to-many class="cn.bean.AuctionRecord"></one-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

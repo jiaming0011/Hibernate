@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 实体类映射文件配置的就是表和类之间的关系 -->
+  <class name="cn.bean.Auction" table="auction" catalog="auctiondb">
+     <!-- hibernate要求表一定要有主键 -->
+     <!-- 主键列的配置 -->
+     <id name="auctionId" type="integer">
+       <column name="auctionId" not-null="true"></column>
+       <!-- mysql和sql server自增长方式设置为identity -->
+       <generator class="identity"></generator>
+     </id>
+     <!-- 配置常规属性和列 -->
+     <property name="auctionName" type="string">
+       <column name="auctionName" not-null="true"></column>
+     </property>
+     <property name="auctionStartPrice" type="double">
+       <column name="auctionStartPrice" not-null="true"></column>
+     </property>
+     <property name="auctionUpset" type="double">
+       <column name="auctionUpset" not-null="true"></column>
+     </property>
+     <property name="auctionStartTime" type="string">
+       <column name="auctionStartTime" not-null="true"></column>
+     </property>
+     <property name="auctionEndTime" type="string">
+       <column name="auctionEndTime" not-null="true"></column>
+     </property>
+     <property name="auctionPic" type="string">
+       <column name="auctionPic" not-null="true"></column>
+     </property>
+     <property name="auctionPicType" type="string">
+       <column name="auctionPicType" not-null="true"></column>
+     </property>
+     <property name="auctionDesc" type="string">
+       <column name="auctionDesc" ></column>
+     </property>
+    <!-- 配置双向多对一 -->
+    <!-- 配置一对多,反向配置 -->
+    <set name="record1" inverse="true" cascade="all" lazy="false" order-by="auctionPrice desc">
+      <key>
+        <column name="auctionId"></column>
+      </key>
+      <one-to-many class="cn.bean.AuctionRecord"></one-to-many>
+    </set>  
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!-- 实体类映射文件配置的就是表和类之间的关系 -->
+  <class name="cn.bean.AuctionRecord" table="auctionrecord" catalog="auctiondb">
+     <!-- hibernate要求表一定要有主键 -->
+     <!-- 主键列的配置 -->
+     <id name="id" type="integer">
+       <column name="id" not-null="true"></column>
+       <!-- mysql和sql server自增长方式设置为identity -->
+       <generator class="identity"></generator>
+     </id>
+    <!-- cascade就是级联，通过设置外建表对应的实体类映射文件中的关联关系,可以达到通过操作一个类给相关联的表同时进行更新操作 -->
+    <many-to-one name="userId" class="cn.bean.AuctionUser" cascade="all" lazy="false">
+      <column name="userId" ></column>
+    </many-to-one>
+    <many-to-one name="auctionId" class="cn.bean.Auction" cascade="all" lazy="false">
+      <column name="auctionId" not-null="true"></column>
+    </many-to-one>
+     <property name="auctionTime" type="string">
+       <column name="auctionTime" ></column>
+     </property>
+     <property name="auctionPrice" type="double">
+       <column name="auctionPrice" ></column>
+     </property>
+
+
+  </class>
+</hibernate-mapping>
